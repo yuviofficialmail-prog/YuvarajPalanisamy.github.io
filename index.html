@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuvaraj P. | Automation Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root { --bg: #0b0f19; --card: #161b2a; --text: #f1f5f9; --accent: #06b6d4; --secondary: #94a3b8; --border: #1e293b; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; line-height: 1.6; }
+        nav { position: fixed; top: 0; width: 100%; background: rgba(11, 15, 25, 0.8); backdrop-filter: blur(10px); padding: 1rem 10%; display: flex; justify-content: space-between; z-index: 1000; border-bottom: 1px solid var(--border); }
+        .logo { font-weight: 800; color: var(--accent); letter-spacing: 1px; }
+        nav a { color: var(--text); text-decoration: none; margin-left: 20px; font-size: 0.9rem; }
+        header { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%; background: radial-gradient(circle at center, #1e293b, #0b0f19); }
+        .container { padding: 80px 10%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 25px; transition: 0.3s; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .tab-menu { display: flex; gap: 10px; margin-bottom: 30px; }
+        .tab { padding: 8px 18px; border-radius: 20px; border: 1px solid var(--border); cursor: pointer; font-size: 0.8rem; }
+        .tab.active { background: var(--accent); color: #0b0f19; border-color: var(--accent); }
+        .tag { background: #06b6d415; color: var(--accent); padding: 3px 10px; border-radius: 4px; font-size: 0.7rem; margin-right: 5px; border: 1px solid #06b6d430; }
+        .code-box { background: #080c14; padding: 30px; border-radius: 15px; border: 1px solid var(--border); margin-bottom: 20px; }
+        .github-link { color: var(--accent); text-decoration: none; font-family: monospace; display: block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">YUVI.ENGINEER</div>
+    <div><a href="#projects">Projects</a><a href="#github">GitHub</a><a href="Yuvaraj_CV_1_04_26.docx">Resume</a></div>
+</nav>
+
+<header>
+    <h1 style="font-size: 3.5rem; margin: 0;">Yuvaraj Palanisamy</h1>
+    <p style="color: var(--secondary); max-width: 600px;">Lead Automation Systems Engineer | Specialist in PLC, C# Integration, and SECS/GEM</p>
+</header>
+
+<div id="projects" class="container">
+    <h2>Industrial Projects</h2>
+    <div class="tab-menu" id="filter-menu">
+        <div class="tab active" onclick="filter('All')">All</div>
+        <div class="tab" onclick="filter('Semiconductor')">Semiconductor</div>
+        <div class="tab" onclick="filter('Automotive')">Automotive</div>
+    </div>
+    <div class="grid" id="project-grid"></div>
+</div>
+
+<div id="github" class="container" style="background: #080c14;">
+    <h2>Highlighted Code Portfolios</h2>
+    <div id="github-links"></div>
+</div>
+
+<script>
+    let projectData = [];
+
+    // Step 1: Connect to your JSON file
+    fetch('./portfolio_data.json')
+        .then(res => res.json())
+        .then(data => {
+            projectData = data.projects;
+            render(projectData);
+            
+            // Render GitHub Links
+            const ghDiv = document.getElementById('github-links');
+            data.github_highlights.forEach(link => {
+                ghDiv.innerHTML += `
+                    <div class="code-box">
+                        <i class="fab fa-github" style="color: var(--accent)"></i>
+                        <strong>Source:</strong> <a class="github-link" href="${link}" target="_blank">${link}</a>
+                    </div>`;
+            });
+        });
+
+    function render(list) {
+        const grid = document.getElementById('project-grid');
+        grid.innerHTML = '';
+        list.forEach(p => {
+            grid.innerHTML += `
+                <div class="card">
+                    <small style="color: var(--accent); letter-spacing: 1px;">${p.client}</small>
+                    <h3 style="margin: 10px 0;">${p.title}</h3>
+                    <p style="color: var(--secondary); font-size: 0.9rem;">${p.description}</p>
+                    <div style="margin-top:15px;">${p.skills.split(',').map(s => `<span class="tag">${s.trim()}</span>`).join('')}</div>
+                </div>`;
+        });
+    }
+
+    function filter(cat) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        event.target.classList.add('active');
+        const filtered = cat === 'All' ? projectData : projectData.filter(p => p.category === cat);
+        render(filtered);
+    }
+</script>
+
+</body>
+</html>
