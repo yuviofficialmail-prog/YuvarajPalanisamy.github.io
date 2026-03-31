@@ -1,0 +1,17 @@
+{
+    "projects": [
+        { "title": "Wafer Handling System", "client": "Axcelis", "description": "Programming support for wafer transfer across end stations in ion implantation tools.", "skills": "Motion Controllers (PMAC), C#", "category": "Semiconductor" },
+        { "title": "PLC to MES Integration", "client": "Celestica", "description": "C# .NET middleware to interface PLC data with MES system.", "skills": "Allen Bradley, C#, SQL", "category": "Industrial/Health-Tech" },
+        { "title": "TVS Assembly Tracing", "client": "TVS", "description": "Integrated PLC and SCADA to monitor vehicle assembly in real-time.", "skills": "Siemens 1500, WinCC, TIA Portal", "category": "Automotive" },
+        { "title": "Simulation Software", "client": "Axcelis", "description": "C# application to simulate field I/O for machine testing.", "skills": "C#, .Net WinForms", "category": "Semiconductor" },
+        { "title": "Reel to Reel Inspection", "client": "Skyworks", "description": "Vision inspection machine processing 300 pcs/min.", "skills": "TRIO, Panasonic EtherCAT", "category": "Semiconductor" },
+        { "title": "Batch Control System", "client": "Bosch", "description": "Implemented batch control via advanced PLC modules.", "skills": "Siemens S71500, SCADA WinCC", "category": "Automotive" }
+    ],
+    "cases": [
+        { "comp": "Troubleshooting & Motion Control", "S": "A Reel-to-Reel package inspection machine had 'slip' errors.", "T": "Troubleshoot winder synchronization without damaging tape.", "A": "Retuned Trio Motion PID loops and added ramped torque limits.", "R": "Achieved 100% successful engagement, zero tape snapping." }
+    ],
+    "github_highlights": [
+        "https://github.com/Yuvaraj-P/PLC-SQL-Communication",
+        "https://github.com/Yuvaraj-P/SECS-GEM-C-Sharp-Lib"
+    ]
+}
